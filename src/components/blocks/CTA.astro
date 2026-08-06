@@ -1,0 +1,133 @@
+---
+interface Props {
+	node: {
+		_key?: string;
+		headline: string;
+		subheadline?: string;
+		primaryCtaLabel?: string;
+		primaryCtaUrl?: string;
+		secondaryCtaLabel?: string;
+		secondaryCtaUrl?: string;
+		backgroundImage?: string;
+	};
+}
+
+const { node } = Astro.props;
+const {
+	_key,
+	headline,
+	subheadline,
+	backgroundImage,
+} = node;
+
+const primaryCta =
+	node.primaryCtaLabel && node.primaryCtaUrl
+		? { label: node.primaryCtaLabel, url: node.primaryCtaUrl }
+		: undefined;
+const secondaryCta =
+	node.secondaryCtaLabel && node.secondaryCtaUrl
+		? { label: node.secondaryCtaLabel, url: node.secondaryCtaUrl }
+		: undefined;
+---
+
+<section class="cta-banner section" id={_key}>
+	<div
+		class="cta-inner"
+		style={backgroundImage ? `--cta-bg: url('${backgroundImage}')` : undefined}
+	>
+		<h2 class="cta-headline">{headline}</h2>
+		{subheadline && <p class="cta-subheadline">{subheadline}</p>}
+		{(primaryCta || secondaryCta) && (
+			<div class="cta-actions">
+				{primaryCta && (
+					<a href={primaryCta.url} class="btn btn-primary btn-lg cta-btn">
+						{primaryCta.label}
+					</a>
+				)}
+				{secondaryCta && (
+					<a href={secondaryCta.url} class="btn btn-lg cta-btn cta-btn-outline">
+						{secondaryCta.label}
+					</a>
+				)}
+			</div>
+		)}
+	</div>
+</section>
+
+<style>
+	.cta-banner {
+		padding: var(--spacing-2xl) var(--spacing-lg);
+	}
+
+	.cta-inner {
+		max-width: var(--wide-width);
+		margin: 0 auto;
+		padding: 100px var(--spacing-2xl);
+		border-radius: 30px;
+		text-align: center;
+		background-image: linear-gradient(
+				rgba(0, 49, 144, 0.75),
+				rgba(0, 49, 144, 0.75)
+			),
+			var(--cta-bg, var(--gradient-brand));
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+
+	.cta-headline {
+		font-size: clamp(1.75rem, 3vw, 2.5rem);
+		font-weight: var(--font-weight-display);
+		color: #ffffff;
+		margin-bottom: var(--spacing-md);
+		max-width: 700px;
+		margin-inline: auto;
+	}
+
+	.cta-subheadline {
+		font-size: var(--font-size-lg);
+		color: rgba(255, 255, 255, 0.9);
+		max-width: 640px;
+		margin: 0 auto var(--spacing-xl);
+		line-height: 1.6;
+	}
+
+	.cta-actions {
+		display: flex;
+		gap: var(--spacing-md);
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	.cta-btn {
+		border-radius: var(--radius-full);
+		padding: 14px 36px;
+		font-weight: 700;
+	}
+
+	.cta-btn-outline {
+		color: #ffffff;
+		background: transparent;
+		border: 1px solid #ffffff;
+	}
+
+	.cta-btn-outline:hover {
+		background: rgba(255, 255, 255, 0.12);
+	}
+
+	@media (max-width: 640px) {
+		.cta-inner {
+			padding: 60px var(--spacing-lg);
+		}
+
+		.cta-actions {
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.cta-btn {
+			width: 100%;
+			max-width: 320px;
+		}
+	}
+</style>

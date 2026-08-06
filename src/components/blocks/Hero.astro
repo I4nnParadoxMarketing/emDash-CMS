@@ -1,0 +1,199 @@
+---
+interface Props {
+	node: {
+		headline: string;
+		subheadline?: string;
+		primaryCtaLabel?: string;
+		primaryCtaUrl?: string;
+		secondaryCtaLabel?: string;
+		secondaryCtaUrl?: string;
+		backgroundImage?: string;
+		centered?: boolean;
+	};
+}
+
+const { node } = Astro.props;
+const { headline, subheadline, backgroundImage, centered } = node;
+
+const primaryCta =
+	node.primaryCtaLabel && node.primaryCtaUrl
+		? { label: node.primaryCtaLabel, url: node.primaryCtaUrl }
+		: undefined;
+const secondaryCta =
+	node.secondaryCtaLabel && node.secondaryCtaUrl
+		? { label: node.secondaryCtaLabel, url: node.secondaryCtaUrl }
+		: undefined;
+
+const isBanner = !!backgroundImage;
+---
+
+<section
+	class:list={["hero", { "hero-centered": centered, "hero-banner": isBanner }]}
+	style={backgroundImage ? `--hero-bg: url('${backgroundImage}')` : undefined}
+>
+	<div class="hero-inner">
+		<div class="hero-content">
+			<h1 class="hero-headline">{headline}</h1>
+			{subheadline && <p class="hero-subheadline">{subheadline}</p>}
+			{(primaryCta || secondaryCta) && (
+				<div class="hero-actions">
+					{primaryCta && (
+						<a href={primaryCta.url} class="btn btn-primary btn-lg hero-cta-primary">
+							{primaryCta.label}
+						</a>
+					)}
+					{secondaryCta && (
+						<a href={secondaryCta.url} class="btn btn-lg hero-cta-secondary">
+							{secondaryCta.label}
+						</a>
+					)}
+				</div>
+			)}
+		</div>
+	</div>
+</section>
+
+<style>
+	.hero {
+		max-width: var(--wide-width);
+		margin: 0 auto;
+		padding: var(--spacing-4xl) var(--spacing-lg);
+		display: grid;
+		grid-template-columns: 1fr;
+		align-items: center;
+	}
+
+	.hero-banner {
+		max-width: none;
+		margin-top: calc(-1 * var(--header-height, 80px));
+		padding: 0;
+		position: relative;
+		min-height: 620px;
+		display: flex;
+		align-items: center;
+		background-image: linear-gradient(
+				to top,
+				rgba(0, 0, 0, 0.55),
+				rgba(0, 0, 0, 0.15) 70%
+			),
+			var(--hero-bg);
+		background-size: cover;
+		background-position: center 21%;
+		background-repeat: no-repeat;
+	}
+
+	.hero-banner .hero-inner {
+		width: 100%;
+		max-width: var(--wide-width);
+		margin: 0 auto;
+		padding: calc(var(--header-height, 80px) + 180px) var(--spacing-lg) 80px;
+	}
+
+	.hero-banner .hero-content {
+		max-width: 720px;
+	}
+
+	.hero-banner .hero-headline {
+		color: #ffffff;
+		background: none;
+		-webkit-text-fill-color: #ffffff;
+		font-size: clamp(2rem, 4vw, 2.625rem);
+		line-height: 1.24;
+		text-transform: capitalize;
+	}
+
+	.hero-banner .hero-subheadline {
+		color: rgba(255, 255, 255, 0.95);
+		font-size: clamp(1.125rem, 2vw, 1.5rem);
+		line-height: 1.33;
+	}
+
+	.hero-centered {
+		text-align: center;
+		max-width: var(--max-width);
+		padding-top: var(--spacing-4xl);
+		padding-bottom: var(--spacing-xl);
+	}
+
+	.hero-centered .hero-content {
+		max-width: 100%;
+		margin: 0 auto;
+	}
+
+	.hero-centered .hero-actions {
+		justify-content: center;
+	}
+
+	.hero-content {
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing-lg);
+		max-width: 560px;
+	}
+
+	.hero-headline {
+		font-size: var(--font-size-5xl);
+		font-weight: var(--font-weight-display);
+		line-height: var(--leading-tight);
+		letter-spacing: var(--tracking-tight);
+		color: var(--color-text);
+	}
+
+	.hero-subheadline {
+		font-size: var(--font-size-xl);
+		line-height: var(--leading-normal);
+		color: var(--color-muted);
+	}
+
+	.hero-actions {
+		display: flex;
+		gap: var(--spacing-md);
+		flex-wrap: wrap;
+	}
+
+	.hero-cta-primary {
+		border-radius: var(--radius-full);
+		padding: 15px 40px;
+		font-size: 1.125rem;
+		font-weight: 700;
+		box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+	}
+
+	.hero-cta-secondary {
+		border-radius: var(--radius-full);
+		padding: 15px 40px;
+		font-size: 1.125rem;
+		font-weight: 700;
+		color: #ffffff;
+		background: transparent;
+		border: 1px solid #ffffff;
+	}
+
+	.hero-cta-secondary:hover {
+		background: rgba(255, 255, 255, 0.12);
+		border-color: #ffffff;
+		transform: translateY(-1px);
+	}
+
+	@media (max-width: 768px) {
+		.hero-banner {
+			min-height: 520px;
+		}
+
+		.hero-banner .hero-inner {
+			padding-top: calc(var(--header-height, 80px) + 120px);
+			padding-bottom: 60px;
+		}
+
+		.hero-actions {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+
+		.hero-cta-primary,
+		.hero-cta-secondary {
+			width: 100%;
+			text-align: center;
+		}
+	}
+</style>

@@ -1,0 +1,151 @@
+---
+import { getEmDashCollection } from "emdash";
+
+interface Props {
+	node: {
+		_key?: string;
+		headline?: string;
+		subheadline?: string;
+	};
+}
+
+const { node } = Astro.props;
+const { _key, headline, subheadline } = node;
+
+const { entries: industries, cacheHint } = await getEmDashCollection("industries", {
+	status: "published",
+	orderBy: { sort_order: "asc" },
+	limit: 24,
+});
+
+if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
+---
+
+<section class="industries section" id={_key ?? "industries"}>
+	<div class="container">
+		{(headline || subheadline) && (
+			<header class="section-header">
+				{headline && <h2 class="section-headline">{headline}</h2>}
+				{subheadline && <p class="section-subheadline">{subheadline}</p>}
+			</header>
+		)}
+		{industries.length > 0 ? (
+			<div class="industries-grid">
+				{industries.map((industry) => {
+					const iconSrc =
+						typeof industry.data.icon === "string"
+							? industry.data.icon
+							: industry.data.icon?.src;
+
+					return (
+					<article class="industry-card">
+						{iconSrc && (
+							<div class="industry-icon">
+								<img
+									src={iconSrc}
+									alt={
+										typeof industry.data.icon === "object"
+											? industry.data.icon?.alt || industry.data.title
+											: industry.data.title
+									}
+									width="48"
+									height="48"
+									loading="lazy"
+								/>
+							</div>
+						)}
+						<h3 class="industry-title">{industry.data.title}</h3>
+						<p class="industry-description">{industry.data.description}</p>
+						{industry.data.link_url && (
+							<a href={industry.data.link_url} class="industry-link">
+								Learn more
+							</a>
+						)}
+					</article>
+					);
+				})}
+			</div>
+		) : (
+			<p class="industries-empty">Add industries in the EmDash admin to populate this section.</p>
+		)}
+	</div>
+</section>
+
+<style>
+	.industries-grid {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: var(--spacing-xl);
+	}
+
+	.industry-card {
+		padding: var(--spacing-xl);
+		background: var(--color-bg);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-lg);
+		transition:
+			transform var(--transition-base),
+			box-shadow var(--transition-base),
+			border-color var(--transition-base);
+	}
+
+	.industry-card:hover {
+		transform: translateY(-4px);
+		box-shadow: var(--shadow-lg);
+		border-color: var(--color-brand-soft);
+	}
+
+	.industry-icon {
+		width: 48px;
+		height: 48px;
+		margin-bottom: var(--spacing-lg);
+		overflow: clip;
+	}
+
+	.industry-icon img {
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+	}
+
+	.industry-title {
+		font-size: var(--font-size-lg);
+		font-weight: var(--font-weight-heading);
+		margin-bottom: var(--spacing-sm);
+		color: var(--color-brand-strong);
+	}
+
+	.industry-description {
+		font-size: var(--font-size-sm);
+		color: var(--color-muted);
+		line-height: var(--leading-normal);
+	}
+
+	.industry-link {
+		display: inline-block;
+		margin-top: var(--spacing-md);
+		font-size: var(--font-size-sm);
+		font-weight: 600;
+		color: var(--color-brand);
+	}
+
+	.industries-empty {
+		text-align: center;
+		color: var(--color-muted);
+		padding: var(--spacing-2xl);
+		background: var(--color-surface);
+		border-radius: var(--radius-lg);
+	}
+
+	@media (max-width: 1100px) {
+		.industries-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 600px) {
+		.industries-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

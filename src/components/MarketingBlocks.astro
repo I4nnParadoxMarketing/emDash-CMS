@@ -1,0 +1,32 @@
+---
+/**
+ * Custom Portable Text renderer for marketing blocks.
+ */
+import type { PortableTextBlock } from "emdash";
+import { PortableText } from "emdash/ui";
+import Hero from "./blocks/Hero.astro";
+import Intro from "./blocks/Intro.astro";
+import Features from "./blocks/Features.astro";
+import IndustriesSection from "./blocks/IndustriesSection.astro";
+import Stats from "./blocks/Stats.astro";
+import FaqSection from "./blocks/FaqSection.astro";
+import CTA from "./blocks/CTA.astro";
+
+interface Props {
+	value: PortableTextBlock[];
+}
+
+const { value } = Astro.props;
+
+const marketingTypes = {
+	"marketing.hero": Hero,
+	"marketing.intro": Intro,
+	"marketing.features": Features,
+	"marketing.industries": IndustriesSection,
+	"marketing.stats": Stats,
+	"marketing.faq": FaqSection,
+	"marketing.cta": CTA,
+};
+---
+
+<PortableText value={value} components={{ type: marketingTypes }} />

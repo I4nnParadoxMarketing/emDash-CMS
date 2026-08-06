@@ -1,0 +1,410 @@
+{
+	"$schema": "https://emdashcms.com/seed.schema.json",
+	"version": "1",
+	"meta": {
+		"name": "Imagine Egg Donation",
+		"description": "Egg donation agency landing page",
+		"author": "Imagine Egg Donation"
+	},
+	"settings": {
+		"title": "Imagine Egg Donation",
+		"tagline": "Fund your dreams while helping a future family in need through egg donation."
+	},
+	"collections": [
+		{
+			"slug": "pages",
+			"label": "Pages",
+			"labelSingular": "Page",
+			"supports": ["drafts", "revisions", "seo"],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true
+				},
+				{
+					"slug": "content",
+					"label": "Content",
+					"type": "portableText"
+				}
+			]
+		},
+		{
+			"slug": "industries",
+			"label": "Industries",
+			"labelSingular": "Industry",
+			"supports": ["drafts", "revisions", "search"],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "description",
+					"label": "Description",
+					"type": "text",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "icon",
+					"label": "Icon",
+					"type": "image"
+				},
+				{
+					"slug": "link_url",
+					"label": "Link URL",
+					"type": "string"
+				},
+				{
+					"slug": "sort_order",
+					"label": "Sort Order",
+					"type": "integer"
+				}
+			]
+		},
+		{
+			"slug": "faqs",
+			"label": "FAQs",
+			"labelSingular": "FAQ",
+			"supports": ["drafts", "revisions", "search"],
+			"fields": [
+				{
+					"slug": "question",
+					"label": "Question",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "answer",
+					"label": "Answer",
+					"type": "text",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "sort_order",
+					"label": "Sort Order",
+					"type": "integer"
+				}
+			]
+		}
+	],
+	"menus": [
+		{
+			"name": "primary",
+			"label": "Primary Navigation",
+			"items": [
+				{
+					"type": "custom",
+					"label": "Why Imagine",
+					"url": "/#industries"
+				},
+				{
+					"type": "custom",
+					"label": "FAQ",
+					"url": "/#faq"
+				},
+				{
+					"type": "custom",
+					"label": "Contact",
+					"url": "/contact"
+				}
+			]
+		},
+		{
+			"name": "footer_product",
+			"label": "Footer: Donors",
+			"items": [
+				{ "type": "custom", "label": "Apply to Donate", "url": "/questionnaire" },
+				{ "type": "custom", "label": "FAQ", "url": "/#faq" },
+				{ "type": "custom", "label": "How It Works", "url": "/#industries" }
+			]
+		},
+		{
+			"name": "footer_company",
+			"label": "Footer: Clinics",
+			"items": [
+				{ "type": "custom", "label": "Clinic Login", "url": "/login" },
+				{ "type": "custom", "label": "Work With Us", "url": "/contact" },
+				{ "type": "custom", "label": "About", "url": "/#intro" }
+			]
+		},
+		{
+			"name": "footer_support",
+			"label": "Footer: Support",
+			"items": [
+				{ "type": "custom", "label": "Contact Us", "url": "/contact" },
+				{ "type": "custom", "label": "Privacy Policy", "url": "/privacy" },
+				{ "type": "custom", "label": "Terms of Service", "url": "/terms" }
+			]
+		}
+	],
+	"content": {
+		"pages": [
+			{
+				"id": "home",
+				"slug": "home",
+				"status": "published",
+				"data": {
+					"title": "Home",
+					"content": [
+						{
+							"_type": "marketing.hero",
+							"_key": "hero",
+							"headline": "Fund your dreams while helping a future family in need through egg donation.",
+							"subheadline": "Every single day, couples all over the United States dream of welcoming a child into their family, but infertility stands in their way. You can make a difference and be the one to change their story forever.",
+							"primaryCtaLabel": "Apply to be an Egg Donor",
+							"primaryCtaUrl": "/questionnaire",
+							"secondaryCtaLabel": "Login for Clinics",
+							"secondaryCtaUrl": "/login",
+							"backgroundImage": "/images/home-banner-v2.webp"
+						},
+						{
+							"_type": "marketing.intro",
+							"_key": "intro",
+							"headline": "Your eggs, your choice, your reward",
+							"body": "At Imagine Egg Donation, we are dedicated to connecting compassionate, thoroughly screened donors with the nation's leading fertility clinics. Our careful matching process not only bridges the gap between generosity and hope but also creates a supportive pathway for those who dream of building or expanding their families."
+						},
+						{
+							"_type": "marketing.industries",
+							"_key": "industries",
+							"headline": "Why Imagine Egg Donation Stands Apart",
+							"subheadline": "We work with the most elite fertility centers in the United States. Our network of centers are in constant need of highly desirable egg donors to help their couples achieve their dream of becoming parents."
+						},
+						{
+							"_type": "marketing.features",
+							"_key": "donors-spark",
+							"headline": "Donors Spark Hope for Growing Families",
+							"subheadline": "By donating your eggs, you create life-changing possibilities for hopeful parents who've struggled to start a family. Imagine the impact of giving someone the chance to hold their baby in their arms for the very first time.",
+							"variant": "highlight",
+							"ctaLabel": "Apply to be an Egg Donor Now",
+							"ctaUrl": "/questionnaire",
+							"features": [
+								{
+									"iconUrl": "/images/give-hope-icon.png",
+									"title": "Give Hope",
+									"description": "Infertility can feel heartbreaking and lonely. Your decision to donate eggs can end someone's pain and bring indescribable joy."
+								},
+								{
+									"iconUrl": "/images/rewarded-icon.png",
+									"title": "Get Rewarded",
+									"description": "The American Society of Reproductive Medicine allows up to six donations—meaning you could potentially earn up to $60,000 total."
+								},
+								{
+									"iconUrl": "/images/supported-icon.png",
+									"title": "Feel Supported",
+									"description": "Our network of elite fertility centers prioritizes your comfort and safety and supports you through the egg donation process. They handle all of the details so you can focus on helping a couple in need."
+								}
+							]
+						},
+						{
+							"_type": "marketing.stats",
+							"_key": "stats",
+							"headline": "Egg Donation By The Numbers",
+							"stats": [
+								{
+									"value": "40+",
+									"label": "Years of Egg Donation in the U.S.",
+									"iconUrl": "/images/year-icon.png"
+								},
+								{
+									"value": "400+",
+									"label": "Clinics Offering Donor Egg Services",
+									"iconUrl": "/images/clinics-offers-icon.png"
+								},
+								{
+									"value": "24K+",
+									"label": "Annual Donor Egg Cycles",
+									"iconUrl": "/images/annual-icon.png"
+								},
+								{
+									"value": "$60K",
+									"label": "Potential Total Donor Compensation",
+									"iconUrl": "/images/potential-icon.png"
+								}
+							]
+						},
+						{
+							"_type": "marketing.faq",
+							"_key": "faq",
+							"headline": "Got Questions? Here's What You Need to Know",
+							"subheadline": "Find answers to the most common questions about egg donation."
+						},
+						{
+							"_type": "marketing.cta",
+							"_key": "cta",
+							"headline": "Ready To Transform Lives?",
+							"subheadline": "Are you ready to make a lasting impact? Your generosity can light the way for a future filled with love and endless possibilities. Let's transform lives together.",
+							"primaryCtaLabel": "Become a Donor",
+							"primaryCtaUrl": "/questionnaire",
+							"secondaryCtaLabel": "Work With Us",
+							"secondaryCtaUrl": "/contact",
+							"backgroundImage": "/images/cta-banner.webp"
+						}
+					]
+				}
+			},
+			{
+				"id": "contact",
+				"slug": "contact",
+				"status": "published",
+				"data": {
+					"title": "Contact Us",
+					"content": [
+						{
+							"_type": "marketing.hero",
+							"_key": "hero",
+							"headline": "Take the First Step and Learn More About Imagine",
+							"subheadline": "Whether you're a prospective donor, a fertility clinic, or someone with questions about our process, we want to hear from you.",
+							"centered": true
+						}
+					]
+				}
+			}
+		],
+		"industries": [
+			{
+				"id": "generous-compensation",
+				"slug": "generous-compensation",
+				"status": "published",
+				"data": {
+					"title": "Generous Compensation",
+					"description": "First-time egg donors receive generous compensation for their time and their willingness to help others. Experienced egg donors tend to receive higher compensation as they are known as proven egg donors.",
+					"icon": "/images/generous-icon.png",
+					"sort_order": 1
+				}
+			},
+			{
+				"id": "seamless-process",
+				"slug": "seamless-process",
+				"status": "published",
+				"data": {
+					"title": "Seamless, Supportive Process",
+					"description": "From initial screening to the final donation, our caring team guides you every step of the way—answering questions, scheduling appointments, and providing emotional support.",
+					"icon": "/images/seamless-icon.png",
+					"sort_order": 2
+				}
+			},
+			{
+				"id": "nationwide-reach",
+				"slug": "nationwide-reach",
+				"status": "published",
+				"data": {
+					"title": "Nationwide Reach, Personalized Care",
+					"description": "You will be connected with top fertility centers that honor your privacy and are focused on your well-being.",
+					"icon": "/images/nationwide-icon.png",
+					"sort_order": 3
+				}
+			},
+			{
+				"id": "understanding-needs",
+				"slug": "understanding-needs",
+				"status": "published",
+				"data": {
+					"title": "Understanding The Needs of Donors and Couples",
+					"description": "Egg Donors make the dream of a family possible for couples struggling to be parents. You also have the satisfaction of knowing that your donation has made the world a little bit better.",
+					"icon": "/images/heart-v2-icon.png",
+					"sort_order": 4
+				}
+			}
+		],
+		"faqs": [
+			{
+				"id": "what-does-donor-do",
+				"slug": "what-does-donor-do",
+				"status": "published",
+				"data": {
+					"question": "What Does an Egg Donor Do?",
+					"answer": "As an egg donor, you're giving someone the chance to start a family when they otherwise couldn't. Some women are unable to have children due to age, health conditions, or other factors, and that's where you come in. By donating your eggs, you're providing a healthy, viable option for someone who dreams of becoming a parent.",
+					"sort_order": 1
+				}
+			},
+			{
+				"id": "how-to-apply",
+				"slug": "how-to-apply",
+				"status": "published",
+				"data": {
+					"question": "How Do I Apply to Become an Egg Donor?",
+					"answer": "Applying is simple! Just fill out a short application on our website. Once you submit it, you'll receive an email with the next steps. Your profile will be added to a secure portal that only fertility centers can access, allowing them to match you with couples looking to start a family.",
+					"sort_order": 2
+				}
+			},
+			{
+				"id": "how-much-money",
+				"slug": "how-much-money",
+				"status": "published",
+				"data": {
+					"question": "How Much Money Can I Make for Donating My Eggs?",
+					"answer": "Egg donors typically earn between $6,000 and $10,000 per donation. According to guidelines set forth by the American Society for Reproductive Medicine (ASRM), a woman can donate up to six times, meaning you could earn up to $60,000 in total.",
+					"sort_order": 3
+				}
+			},
+			{
+				"id": "am-i-qualified",
+				"slug": "am-i-qualified",
+				"status": "published",
+				"data": {
+					"question": "Am I Qualified to Be an Egg Donor?",
+					"answer": "There are general qualifications to become a donor, but each fertility clinic evaluates candidates individually. The best way to find out is to complete our short intake form—an Imagine team member or a clinic in our network will then reach out to discuss your eligibility.",
+					"sort_order": 4
+				}
+			},
+			{
+				"id": "health-insurance",
+				"slug": "health-insurance",
+				"status": "published",
+				"data": {
+					"question": "Do I Need Health Insurance to Become an Egg Donor?",
+					"answer": "No, health insurance is not required to become an egg donor. All medical expenses related to the donation process are covered by the fertility center, so you won't have to worry about any out-of-pocket costs.",
+					"sort_order": 5
+				}
+			},
+			{
+				"id": "future-fertility",
+				"slug": "future-fertility",
+				"status": "published",
+				"data": {
+					"question": "Will Donating Eggs Affect My Future Fertility?",
+					"answer": "The process of egg donation has been in existence for decades and there is very little information connecting any risks of egg donation to a woman's long-term fertility. Women in their 20s have between 150,000 to 300,000 viable eggs.",
+					"sort_order": 6
+				}
+			},
+			{
+				"id": "still-have-baby",
+				"slug": "still-have-baby",
+				"status": "published",
+				"data": {
+					"question": "If I Donate My Eggs, Can I Still Have a Baby?",
+					"answer": "There are no known associations between egg donation and infertility. Many donors complete multiple donation cycles, take a break to have their own families, and even choose to donate again.",
+					"sort_order": 7
+				}
+			},
+			{
+				"id": "confidential",
+				"slug": "confidential",
+				"status": "published",
+				"data": {
+					"question": "Is Egg Donation Confidential and Anonymous?",
+					"answer": "Yes, in most cases, egg donation is typically anonymous, meaning you and the intended parents will never meet. Fertility clinics ensure confidentiality throughout the process.",
+					"sort_order": 8
+				}
+			},
+			{
+				"id": "result-in-baby",
+				"slug": "result-in-baby",
+				"status": "published",
+				"data": {
+					"question": "What Happens if My Donated Eggs Result in a Baby?",
+					"answer": "While the baby will share your genetics, you won't have any legal or parental responsibilities. Egg donors don't have parental rights or obligations, and once your donation is complete, the intended parents take full responsibility.",
+					"sort_order": 9
+				}
+			}
+		]
+	}
+}
