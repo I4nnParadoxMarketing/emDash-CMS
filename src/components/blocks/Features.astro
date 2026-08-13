@@ -1,0 +1,174 @@
+---
+import { Icon } from "astro-iconset/components";
+
+interface Props {
+	node: {
+		_key?: string;
+		headline?: string;
+		subheadline?: string;
+		variant?: "default" | "highlight";
+		ctaLabel?: string;
+		ctaUrl?: string;
+		features: Array<{
+			icon?: string;
+			iconUrl?: string;
+			title: string;
+			description: string;
+		}>;
+	};
+}
+
+const { node } = Astro.props;
+const { _key, headline, subheadline, features, variant = "default", ctaLabel, ctaUrl } = node;
+
+const iconMap: Record<string, string> = {
+	zap: "ph:lightning",
+	shield: "ph:shield-check",
+	users: "ph:users-three",
+	chart: "ph:chart-bar",
+	code: "ph:code",
+	globe: "ph:globe",
+	heart: "ph:heart",
+	star: "ph:star",
+	check: "ph:check-circle",
+	lock: "ph:lock",
+	clock: "ph:clock",
+	cloud: "ph:cloud",
+};
+
+const isHighlight = variant === "highlight";
+---
+
+<section class:list={["features section", { "features-highlight": isHighlight }]} id={_key}>
+	<div class="container">
+		{(headline || subheadline) && (
+			<header class="section-header">
+				{headline && <h2 class="section-headline">{headline}</h2>}
+				{subheadline && <p class="section-subheadline">{subheadline}</p>}
+			</header>
+		)}
+		<div
+			class:list={[
+				"features-grid",
+				{ "features-grid-highlight": isHighlight, "features-grid-four": features.length === 4 },
+			]}
+		>
+			{features.map((feature) => (
+				<div class="feature-card">
+					<div class="feature-icon">
+						{feature.iconUrl ? (
+							<img src={feature.iconUrl} alt="" width="48" height="48" loading="lazy" />
+						) : (
+							<div class="icon-tile">
+								<Icon name={iconMap[feature.icon || "heart"] || "ph:sparkle"} aria-hidden="true" />
+							</div>
+						)}
+					</div>
+					<h3 class="feature-title">{feature.title}</h3>
+					<p class="feature-description">{feature.description}</p>
+				</div>
+			))}
+		</div>
+		{ctaLabel && ctaUrl && (
+			<div class="features-cta">
+				<a href={ctaUrl} class="btn btn-primary btn-lg features-cta-btn">
+					{ctaLabel}
+				</a>
+			</div>
+		)}
+	</div>
+</section>
+
+<style>
+	.features-highlight {
+		background: var(--color-surface);
+	}
+
+	.features-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: var(--spacing-xl);
+	}
+
+	.features-grid-four {
+		grid-template-columns: repeat(4, 1fr);
+	}
+
+	.features-grid-highlight {
+		grid-template-columns: repeat(3, 1fr);
+		max-width: 960px;
+		margin: 0 auto;
+	}
+
+	.feature-card {
+		padding: var(--spacing-xl);
+		background: var(--color-bg);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-lg);
+		transition:
+			transform var(--transition-base),
+			box-shadow var(--transition-base),
+			border-color var(--transition-base);
+	}
+
+	.feature-card:hover {
+		transform: translateY(-4px);
+		box-shadow: var(--shadow-lg);
+		border-color: var(--color-brand-soft);
+	}
+
+	.feature-icon {
+		margin-bottom: var(--spacing-lg);
+	}
+
+	.feature-icon img {
+		width: 48px;
+		height: 48px;
+		object-fit: contain;
+	}
+
+	.feature-title {
+		font-size: var(--font-size-lg);
+		font-weight: var(--font-weight-heading);
+		margin-bottom: var(--spacing-sm);
+		color: var(--color-brand-strong);
+	}
+
+	.feature-description {
+		font-size: var(--font-size-sm);
+		color: var(--color-muted);
+		line-height: var(--leading-normal);
+	}
+
+	.features-cta {
+		text-align: center;
+		margin-top: var(--spacing-3xl);
+	}
+
+	.features-cta-btn {
+		border-radius: var(--radius-full);
+		padding: 15px 40px;
+		font-size: 1.125rem;
+		font-weight: 700;
+	}
+
+	@media (max-width: 1100px) {
+		.features-grid-four {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 900px) {
+		.features-grid,
+		.features-grid-highlight {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 600px) {
+		.features-grid,
+		.features-grid-highlight {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

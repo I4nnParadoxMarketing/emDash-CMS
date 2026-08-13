@@ -1,0 +1,33 @@
+/*
+  Imagine Egg Donation brand theme
+  Based on the Figma landing page design and live site palette.
+*/
+
+:root {
+  --color-brand: #0170c1;
+  --color-brand-strong: #003190;
+  --color-brand-soft: #e8f4fc;
+  --color-on-brand: #ffffff;
+  --color-brand-ring: rgba(1, 112, 193, 0.35);
+
+  --color-accent: #53dc5e;
+  --color-accent-soft: #edfcef;
+
+  --gradient-brand: linear-gradient(135deg, #0170c1 0%, #003190 100%);
+  --gradient-brand-strong: linear-gradient(135deg, #0170c1 0%, #0056a8 100%);
+  --gradient-brand-soft: linear-gradient(135deg, rgba(1, 112, 193, 0.15) 0%, rgba(0, 49, 144, 0.08) 100%);
+  --gradient-headline: none;
+
+  --color-bg: #ffffff;
+  --color-surface: #fafafa;
+  --color-text: #1a1a1a;
+  --color-muted: #777777;
+  --color-border: #e8e8e8;
+
+  --radius: 12px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  --font-weight-display: 700;
+  --font-weight-heading: 700;
+}
