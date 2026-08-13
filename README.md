@@ -13,15 +13,10 @@ npm run dev
 ```
 
 - Site: [http://localhost:4321](http://localhost:4321)
-- Admin (dev bypass): [http://localhost:4321/admin](http://localhost:4321/admin) — skips passkey login in local dev
+- Admin (no login in dev): [http://localhost:4321/_emdash/admin](http://localhost:4321/_emdash/admin) — auto sign-in when running `npm run dev`
+- Shortcut: [http://localhost:4321/admin](http://localhost:4321/admin)
 
-Direct bypass URL:
-
-```
-http://localhost:4321/_emdash/api/auth/dev-bypass?redirect=/_emdash/admin
-```
-
-Dev only — does not work in production.
+Dev middleware signs you in automatically. No passkey or setup wizard required locally.
 
 ## Deploy to Vercel
 
