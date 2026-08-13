@@ -1,0 +1,8 @@
+---
+// Dev-only shortcut: skip passkey auth and go straight to the CMS admin.
+if (import.meta.env.DEV) {
+	return Astro.redirect("/_emdash/api/auth/dev-bypass?redirect=/_emdash/admin");
+}
+
+return Astro.redirect("/_emdash/admin");
+---
